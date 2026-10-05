@@ -530,17 +530,16 @@ class Overlays:
         shown = int(clamp((t - ln["t"]) / max(d * 0.92, 0.1)) * words_total + 0.999)
         lh = 54
         bw = int(max(f.getlength(l) for l in lines) + 80)
-        bh = lh * len(lines) + 70
+        bh = lh * len(lines) + 40
         lay = Image.new("RGBA", (bw, bh), (0, 0, 0, 0))
         dd = ImageDraw.Draw(lay)
         dd.rounded_rectangle([0, 0, bw - 1, bh - 1], 26, fill=(24, 18, 20, 200))
-        dd.text((40, 14), "NARRATOR", font=font("Bold", 20), fill=(252, 180, 186))
         k = 0
         for i, l in enumerate(lines):
             x = 40
             for wd in l.split():
                 col = (255, 255, 255) if k < shown else (255, 255, 255, 90)
-                dd.text((x, 44 + i * lh), wd, font=f, fill=col)
+                dd.text((x, 18 + i * lh), wd, font=f, fill=col)
                 x += f.getlength(wd + " ")
                 k += 1
         cx = 1430 if in_ui else W / 2
