@@ -63,15 +63,19 @@ TOTAL = SEGMENTS[-1]["start"] + SEGMENTS[-1]["dur"]  # 89.7s
 ROLE = {"seeker": "Student", "friend1": "Friend", "friend2": "Friend", "family": "Family", "donor": "Donor"}
 
 # Spoken lines. seg = index into SEGMENTS for anchor mapping (None = UI layout / narrator).
+# t = when the line starts; fit = stretch the AI voice to this many seconds so it
+# matches how long the actor's mouth moves (measured with face tracking);
+# text/show override the bubble text and how long it stays up.
 LINES = [
-    dict(key="s1_hello", who="seeker", t=3.9, seg=0, anchor=(0.70, 0.47)),
-    dict(key="s1_what", who="seeker", t=5.3, seg=0, anchor=(0.70, 0.47)),
-    dict(key="s1_family", who="family", t=8.9, seg=1, anchor=(0.43, 0.40)),
-    dict(key="s1_anyone", who="seeker", t=12.8, seg=2, anchor=(0.69, 0.50)),
-    dict(key="s2_maybe", who="friend1", t=19.3, seg=3, anchor=(0.50, 0.20)),
-    dict(key="s2_time", who="seeker", t=22.8, seg=3, anchor=(0.71, 0.36)),
-    dict(key="s3_wait", who="friend2", t=24.4, seg=4, anchor=(0.22, 0.16)),
-    dict(key="s3_doogo", who="seeker", t=26.6, seg=4, anchor=(0.70, 0.34)),
+    dict(key="s1_hello", who="seeker", t=4.0, seg=0, anchor=(0.70, 0.47)),
+    dict(key="s1_what", who="seeker", t=5.6, seg=0, anchor=(0.70, 0.47), text="What? They need blood?", show=2.6),
+    dict(key="s1_need", who="seeker", t=6.25, fit=1.6, bubble=False),
+    dict(key="s1_family", who="family", t=8.85, fit=3.45, seg=1, anchor=(0.43, 0.40)),
+    dict(key="s1_anyone", who="seeker", t=12.9, fit=2.1, seg=2, anchor=(0.69, 0.50)),
+    dict(key="s2_maybe", who="friend1", t=18.9, seg=3, anchor=(0.50, 0.20)),
+    dict(key="s2_time", who="seeker", t=23.3, seg=3, anchor=(0.71, 0.36)),
+    dict(key="s3_wait", who="friend2", t=24.7, seg=4, anchor=(0.22, 0.16)),
+    dict(key="s3_doogo", who="seeker", t=26.9, seg=4, anchor=(0.70, 0.34)),
     dict(key="n1", who="narrator", t=28.6),
     dict(key="s4_sent", who="seeker", t=42.3, seg=7, anchor=(0.10, 0.80)),
     dict(key="s5_type", who="donor", t=49.9, seg=None),

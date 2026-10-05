@@ -5,6 +5,7 @@ generated, so there are no licensing issues with the music.
 """
 import json
 import os
+import subprocess
 
 import numpy as np
 import soundfile as sf
@@ -229,8 +230,15 @@ def score():
     return reverb(m, 2.0, 0.3)
 
 
-def load_voice(key):
-    x, sr = sf.read(os.path.join(ASSETS, "vo", key + ".wav"))
+def load_voice(key, fit=None):
+    path = os.path.join(ASSETS, "vo", key + ".wav")
+    if fit:
+        # stretch (pitch kept) so the line lasts as long as the actor's mouth moves
+        d = sf.info(path).duration
+        tmp = os.path.join(OUT, f"_fit_{key}.wav")
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", path, "-af", f"atempo={d / fit:.4f}", tmp], check=True)
+        path = tmp
+    x, sr = sf.read(path)
     if x.ndim > 1:
         x = x.mean(1)
     if sr != SR:
@@ -244,7 +252,7 @@ def main():
     voices = np.zeros((N, 2))
     duck = np.zeros(N)
     for ln in LINES:
-        v = load_voice(ln["key"])
+        v = load_voice(ln["key"], ln.get("fit"))
         narr = ln["who"] == "narrator"
         pan = 0.0 if narr else {"seeker": 0.12, "friend1": -0.05, "friend2": -0.2, "family": -0.1, "donor": 0.08}[ln["who"]]
         add(voices, v, ln["t"], 1.0 if narr else 0.95, pan)

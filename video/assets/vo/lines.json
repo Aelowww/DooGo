@@ -6,8 +6,8 @@
  ],
  "s1_what": [
   "seeker",
-  "What? They need blood?",
-  1.3
+  "What?",
+  0.66
  ],
  "s1_family": [
   "family",
@@ -88,5 +88,10 @@
   "narrator",
   "DooGo. Connecting donors, saving lives.",
   3.01
+ ],
+ "s1_need": [
+  "seeker",
+  "They need blood?",
+  1.05
  ]
 }

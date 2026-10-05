@@ -11,7 +11,8 @@ k=Kokoro(os.path.join(D,'kokoro-v1.0.onnx'),os.path.join(D,'voices-v1.0.bin'))
 V={'seeker':('af_heart',1.0),'friend1':('af_bella',1.0),'friend2':('am_puck',1.0),'family':('bm_george',1.0),'donor':('am_fenrir',1.0),'narrator':('am_michael',0.92)}
 L=[
 ('s1_hello','seeker',"Hello?"),
-('s1_what','seeker',"What? They need blood?"),
+('s1_what','seeker',"What?"),
+('s1_need','seeker',"They need blood?"),
 ('s1_family','family',"The hospital needs a blood donor. Please, hurry."),
 ('s1_anyone','seeker',"Does anyone know a blood donor?"),
 ('s2_maybe','friend1',"Maybe try asking somewhere else?"),

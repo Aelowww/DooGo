@@ -101,7 +101,7 @@ def make_bubble(text, role, tail="down", dark=False):
     tw = max(f.getlength(l) for l in lines)
     bw, bh = int(tw + 64), int(lh * len(lines) + 44)
     tag_f = font("Bold", 24)
-    tag_w = int(tag_f.getlength(role.upper()) + 36)
+    tag_w = int(tag_f.getlength(role.upper()) + 36) if role else 0
     tail_h = 26
     cw, ch = max(bw, tag_w + 30), bh + 24 + tail_h
     im = Image.new("RGBA", (cw + 4, ch + 4), (0, 0, 0, 0))
@@ -123,6 +123,8 @@ def make_bubble(text, role, tail="down", dark=False):
         tip = (bw // 2, top + bh)
     for i, l in enumerate(lines):
         d.text((32, top + 22 + i * lh), l, font=f, fill=txt)
+    if not role:
+        return im, tip
     # role tag
     tag_fill = SURFACE if dark else CRIMSON
     tag_txt = CRIMSON if dark else SURFACE
@@ -472,11 +474,14 @@ class Overlays:
     def __init__(self):
         self.bubbles = {}
         for ln in LINES:
-            if ln["who"] == "narrator":
+            if ln["who"] == "narrator" or not ln.get("bubble", True):
                 continue
             who, text, d = VO[ln["key"]]
+            text = ln.get("text", text)
+            d = ln.get("show", ln.get("fit", d))
             tail = "down" if ln.get("seg") is not None else "left"
-            img, tip = make_bubble(text, ROLE[ln["who"]], tail=tail, dark=(ln["who"] == "seeker"))
+            role = "" if ln["who"] == "seeker" else ROLE[ln["who"]]
+            img, tip = make_bubble(text, role, tail=tail, dark=(ln["who"] == "seeker"))
             sh, pad = shadowed(img, blur=16, offset=(0, 8), alpha=70, pad=40)
             self.bubbles[ln["key"]] = (sh, (tip[0] + pad, tip[1] + pad), d)
         self.chips = {c[2]: make_chip(c[2]) for c in CHIPS}
@@ -665,7 +670,7 @@ def main():
             if ln["who"] == "narrator":
                 if ln.get("caption", True):
                     ov.caption(frame, ln, t)
-            else:
+            elif ln.get("bubble", True):
                 ov.bubble(frame, ln, t, None)
         out = frame.convert("RGB")
         if only:
