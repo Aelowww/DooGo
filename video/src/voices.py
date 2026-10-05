@@ -15,6 +15,7 @@ L=[
 ('s1_need','seeker',"They need blood?"),
 ('s1_family','family',"The hospital needs a blood donor. Please, hurry."),
 ('s1_anyone','seeker',"Does anyone know a blood donor?"),
+('n0','narrator',"She messages everyone she knows... but no one replies."),
 ('s2_maybe','friend1',"Maybe try asking somewhere else?"),
 ('s2_time','seeker',"We don't have much time."),
 ('s3_wait','friend2',"Wait. Have you tried DooGo?"),

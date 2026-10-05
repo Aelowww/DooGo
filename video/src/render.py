@@ -13,7 +13,7 @@ import sys
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-from timeline import (APP_BG, ASSETS, BANNERS, BEATS, BORDER, CHIPS, CRIMSON, FPS, H, ICON_BG, LINES, OUT,
+from timeline import (APP_BG, ASSETS, BANNERS, BEATS, BORDER, CHATS, CHIPS, FLOAT_CHATS, CRIMSON, FPS, H, ICON_BG, LINES, OUT,
                       ROLE, SEGMENTS, SURFACE, TEXT, TEXT_2, TINT, TITLES, TOTAL, W, clip)
 
 FONT_DIR = os.path.join(ASSETS, "fonts")
@@ -186,6 +186,44 @@ def logo_rgba():
     alpha = np.where(soft, ((235 - mn) * 255 / 35).clip(0, 255), alpha)
     a[..., 3] = alpha
     return Image.fromarray(a.astype(np.uint8), "RGBA")
+
+
+def make_chat_card(c, seen=0.0, typing=None):
+    """Floating chat from an ordinary messaging app: our message sent, seen, no reply."""
+    BLUE = (10, 132, 255)
+    w_ = 470
+    f = font("Medium", 26)
+    lines = wrap(c["msg"], f, 330)
+    bh = 34 * len(lines) + 30
+    h_ = 96 + bh + 70
+    im = rrect((w_, h_), 30, (255, 255, 255, 248))
+    d = ImageDraw.Draw(im)
+    d.ellipse([22, 20, 78, 76], fill=(214, 222, 235))
+    tw = font("Bold", 22).getlength(c["init"])
+    d.text((50 - tw / 2, 35), c["init"], font=font("Bold", 22), fill=(70, 85, 110))
+    d.text((94, 22), c["name"], font=font("Bold", 28), fill=TEXT)
+    d.text((94, 56), "Active 5m ago", font=font("Regular", 20), fill=TEXT_2)
+    d.line([20, 92, w_ - 20, 92], fill=(236, 236, 240), width=2)
+    bw = int(max(f.getlength(l) for l in lines) + 36)
+    x0, y0 = w_ - 22 - bw, 108
+    d.rounded_rectangle([x0, y0, w_ - 22, y0 + bh], 24, fill=BLUE)
+    for i, l in enumerate(lines):
+        d.text((x0 + 18, y0 + 14 + i * 34), l, font=f, fill=(255, 255, 255))
+    if seen > 0:
+        col = (130, 135, 145, int(255 * seen))
+        lay = Image.new("RGBA", im.size, (0, 0, 0, 0))
+        ImageDraw.Draw(lay).text((w_ - 22 - font("Medium", 20).getlength("Seen"), y0 + bh + 8), "Seen",
+                                 font=font("Medium", 20), fill=col)
+        im.alpha_composite(lay)
+    if typing is not None:
+        ty = y0 + bh + 8
+        d.rounded_rectangle([22, ty, 96, ty + 40], 20, fill=(233, 233, 238))
+        for i in range(3):
+            ph = (typing * 2.5 - i * 0.3) % 1
+            rr = 5 + 2 * max(0, math.sin(ph * math.pi))
+            cx = 42 + i * 17
+            d.ellipse([cx - rr, ty + 20 - rr, cx + rr, ty + 20 + rr], fill=(150, 150, 158))
+    return shadowed(im, blur=20, offset=(0, 12), alpha=95, pad=40)[0]
 
 
 # -------------------------------------------------------------- phone mockup
@@ -582,6 +620,26 @@ class Overlays:
                 y = -im.height + (im.height + 10) * p
                 base.alpha_composite(_alpha(im, out), (int(W / 2 - im.width / 2), int(y)))
 
+    def float_chats(self, base, t):
+        f0, f1 = FLOAT_CHATS
+        if not (f0 <= t <= f1):
+            return
+        out = clamp((f1 - t) / 0.35)
+        for i, c in enumerate(CHATS):
+            lt = t - c["t"]
+            if lt < 0:
+                continue
+            seen = clamp((lt - 1.1) / 0.3)
+            # someone starts typing... then stops. No reply.
+            typing = (lt - 1.8) if 1.8 <= lt < 2.9 else None
+            im = make_chat_card(c, seen, typing)
+            p = back_out(lt / 0.4)
+            a = clamp(lt / 0.2) * out
+            fy = math.sin(t * 1.3 + i * 2.1) * 9
+            x, y = c["pos"]
+            s = 0.8 + 0.2 * p
+            paste_center(base, im, x + im.width / 2, y + im.height / 2 + fy + (1 - p) * 40, scale=s, alpha=a)
+
     def pulse(self, arr, t):
         """Red heartbeat vignette for the tense opening."""
         if not (BEATS[0] - 0.1 <= t <= BEATS[-1] + 0.8):
@@ -658,6 +716,10 @@ def main():
         # fades: in from black at the very start, out to black at the end
         rgb = np.asarray(frame.convert("RGB")).astype(np.float32)
         rgb = ov.pulse(rgb, t)
+        f0, f1 = FLOAT_CHATS
+        dim = 0.35 * clamp((t - f0) / 0.4) * clamp((f1 - t) / 0.4)
+        if dim > 0:
+            rgb = rgb * (1 - dim)
         fb = clamp(t / 0.5) * clamp((TOTAL - t) / 0.7)
         if fb < 1:
             rgb = rgb * fb
@@ -665,6 +727,7 @@ def main():
         for tt in TITLES:
             ov.title(frame, tt, t)
         ov.chip(frame, t)
+        ov.float_chats(frame, t)
         ov.banner(frame, t)
         for ln in LINES:
             if ln["who"] == "narrator":

@@ -67,12 +67,13 @@ ROLE = {"seeker": "Student", "friend1": "Friend", "friend2": "Friend", "family":
 # matches how long the actor's mouth moves (measured with face tracking);
 # text/show override the bubble text and how long it stays up.
 LINES = [
-    dict(key="s1_hello", who="seeker", t=4.0, seg=0, anchor=(0.70, 0.47)),
-    dict(key="s1_what", who="seeker", t=5.6, seg=0, anchor=(0.70, 0.47), text="What? They need blood?", show=2.6),
-    dict(key="s1_need", who="seeker", t=6.25, fit=1.6, bubble=False),
+    dict(key="s1_hello", who="seeker", t=5.0, seg=0, anchor=(0.70, 0.47)),
+    dict(key="s1_what", who="seeker", t=6.0, seg=0, anchor=(0.70, 0.47), show=0.85),
+    dict(key="s1_need", who="seeker", t=7.0, fit=1.35, seg=0, anchor=(0.70, 0.47)),
     dict(key="s1_family", who="family", t=8.85, fit=3.45, seg=1, anchor=(0.43, 0.40)),
     dict(key="s1_anyone", who="seeker", t=12.9, fit=2.1, seg=2, anchor=(0.69, 0.50)),
-    dict(key="s2_maybe", who="friend1", t=18.9, seg=3, anchor=(0.50, 0.20)),
+    dict(key="n0", who="narrator", t=15.7),
+    dict(key="s2_maybe", who="friend1", t=20.0, seg=3, anchor=(0.50, 0.20)),
     dict(key="s2_time", who="seeker", t=23.3, seg=3, anchor=(0.71, 0.36)),
     dict(key="s3_wait", who="friend2", t=24.7, seg=4, anchor=(0.22, 0.16)),
     dict(key="s3_doogo", who="seeker", t=26.9, seg=4, anchor=(0.70, 0.34)),
@@ -115,6 +116,14 @@ BANNERS = [
     dict(t0=70.4, t1=72.7, title="A donor has responded to your request.", body="Carl T. accepted your blood request"),
 ]
 
+# Scene 2: floating chats from other apps - messages sent, seen, no reply
+FLOAT_CHATS = (15.1, 19.9)
+CHATS = [
+    dict(name="Tita Grace", init="TG", msg="Tita, do you know anyone with O+ blood? It's urgent.", pos=(70, 380), t=15.25),
+    dict(name="BSIT 3A Group", init="3A", msg="Does anyone know a blood donor? Please, we need one now.", pos=(560, 560), t=15.85),
+    dict(name="Kuya Mark", init="KM", msg="Kuya, are you free to donate blood? Please reply.", pos=(1400, 560), t=16.45),
+]
+
 # Heartbeat (Scene 1-2 tension): beat times drive both the SFX and the red pulse
 def _beats():
     out, t, gap = [], 8.6, 0.86
@@ -128,5 +137,5 @@ def _beats():
 
 
 BEATS = _beats()
-RING = (0.8, 3.6)  # phone ringing (absolute)
+RING = (0.8, 3.9)  # phone ringing (absolute)
 MUSIC_PAUSE = (21.0, 24.3)
