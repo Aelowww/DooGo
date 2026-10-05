@@ -1,0 +1,92 @@
+{
+ "s1_hello": [
+  "seeker",
+  "Hello?",
+  0.79
+ ],
+ "s1_what": [
+  "seeker",
+  "What? They need blood?",
+  1.3
+ ],
+ "s1_family": [
+  "family",
+  "The hospital needs a blood donor. Please, hurry.",
+  3.24
+ ],
+ "s1_anyone": [
+  "seeker",
+  "Does anyone know a blood donor?",
+  1.71
+ ],
+ "s2_maybe": [
+  "friend1",
+  "Maybe try asking somewhere else?",
+  1.62
+ ],
+ "s2_time": [
+  "seeker",
+  "We don't have much time.",
+  1.32
+ ],
+ "s3_wait": [
+  "friend2",
+  "Wait. Have you tried DooGo?",
+  1.56
+ ],
+ "s3_doogo": [
+  "seeker",
+  "DooGo?",
+  0.83
+ ],
+ "n1": [
+  "narrator",
+  "DooGo connects people who need blood with voluntary donors who are ready to help.",
+  5.18
+ ],
+ "s4_sent": [
+  "seeker",
+  "Okay. The request is sent.",
+  1.73
+ ],
+ "s5_type": [
+  "donor",
+  "That's my blood type.",
+  1.15
+ ],
+ "n2": [
+  "narrator",
+  "Donors can view blood requests, and respond when they are available to help.",
+  4.99
+ ],
+ "s5_help": [
+  "donor",
+  "I can help.",
+  0.75
+ ],
+ "n3": [
+  "narrator",
+  "Donors can update their availability whenever they can, or turn it off when they're unavailable.",
+  6.36
+ ],
+ "s7_thanks": [
+  "seeker",
+  "Thank you so much. You really helped us.",
+  2.05
+ ],
+ "s7_course": [
+  "donor",
+  "Of course. I'm glad I could help.",
+  1.6
+ ],
+ "n4": [
+  "narrator",
+  "When someone needs blood, finding the right donor shouldn't have to be a struggle.",
+  4.91
+ ],
+ "n5": [
+  "narrator",
+  "DooGo. Connecting donors, saving lives.",
+  3.01
+ ]
+}
