@@ -1,6 +1,6 @@
 # DooGo commercial video
 
-Final cut: `DooGo_Commercial.mp4` (1920x1080, 30 fps, 1:29.7). It's attached to the repo's draft release, next to the raw clips.
+Final cut: `DooGo_Commercial.mp4` in this folder (1920x1080, 30 fps, 1:29.7). The raw clips are in the repo's draft release.
 
 ## How it's built
 - `src/timeline.py`: the edit. Cuts, timings, chat-bubble positions, step labels, notifications.
