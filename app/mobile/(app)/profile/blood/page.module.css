@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.card h2 {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card strong {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}

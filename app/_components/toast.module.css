@@ -1,0 +1,158 @@
+/* Phones: above the bottom navigation. Desktop: top right, under the header. */
+.region {
+  position: fixed;
+  right: 16px;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .region {
+    top: 96px;
+    right: 32px;
+    bottom: auto;
+    left: auto;
+  }
+}
+
+.toast {
+  position: relative;
+  width: min(380px, 100%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 16px;
+  overflow: hidden;
+  border: 1px solid #c9e8d4;
+  border-radius: 18px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 22px 44px -18px rgba(60, 8, 15, 0.45);
+  pointer-events: auto;
+  animation: toastIn 260ms var(--ease) both;
+}
+
+.leaving {
+  animation: toastOut 220ms ease both;
+}
+
+/* Blood-drop badge, matching the result screens. */
+.icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% 0 50% 50%;
+  background: linear-gradient(145deg, #23a05a, #15803d);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+
+.icon svg {
+  transform: rotate(45deg);
+}
+
+.error {
+  border-color: var(--border-tinted);
+}
+
+.error .icon {
+  background: linear-gradient(145deg, #c42a3c, var(--primary));
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.text strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.text small {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.close {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--background-app);
+  color: var(--text-primary);
+}
+
+/* Shrinking bar along the bottom showing how long the card stays. */
+.timer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #23a05a;
+  transform-origin: left;
+  animation: drain linear both;
+}
+
+.error .timer {
+  background: var(--primary);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes drain {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .leaving,
+  .timer {
+    animation-duration: 1ms;
+  }
+}

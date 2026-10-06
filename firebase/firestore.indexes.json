@@ -1,0 +1,22 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "donors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "searchable", "order": "ASCENDING" },
+        { "fieldPath": "location", "order": "ASCENDING" },
+        { "fieldPath": "bloodType", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "read", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

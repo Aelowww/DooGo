@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  color-scheme: light;
+
+  /* DooGo UI Guidelines (Figma) */
+  --primary: #a61b2b;
+  --primary-pressed: #8f1c13;
+  --text-primary: #1f1f1f;
+  --text-secondary: #6b7280;
+  --surface-raised: #ffffff;
+  --surface-tinted: #fff7f7;
+  --surface-icon: #fce7e7;
+  --background-app: #f8f5f2;
+  --border-neutral: #e7e2dd;
+  --border-tinted: #f1d9d9;
+  --border-input: #d1d5db;
+  --border-field: #e5e7eb;
+  --icon-inactive: #9ca3af;
+  --nav-inactive: #9e9e9e;
+  --nav-surface: #fcf9f7;
+  --placeholder: #939393;
+  --disabled: #e5e7eb;
+
+  --radius-icon: 12px;
+  --radius-input: 16px;
+  --radius-card: 20px;
+  --radius-button: 28px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 8px 10px rgba(0, 0, 0, 0.03);
+  --shadow-card-tinted: 0 8px 10px rgba(0, 0, 0, 0.04);
+  --shadow-button: 0 10px 12px rgba(166, 27, 43, 0.15);
+
+  --gutter: 24px;
+  --phone-width: 402px;
+  --nav-height: 76px;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion: 220ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: #efe9e4;
+  color: var(--text-primary);
+  font-family: "Inter", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+::selection {
+  background: var(--surface-icon);
+}

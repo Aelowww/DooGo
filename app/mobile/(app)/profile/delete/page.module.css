@@ -1,0 +1,35 @@
+.warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 8px;
+  text-align: center;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-tinted);
+  border-radius: 50px;
+  background: var(--surface-tinted);
+  color: var(--primary);
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.warning h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.warning p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.4;
+}

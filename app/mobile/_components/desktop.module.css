@@ -1,0 +1,569 @@
+/* ---------- Signed-in app shell ---------- */
+
+.app {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 50% -200px, rgba(166, 27, 43, 0.07), transparent 600px),
+    var(--background-app);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background:
+    radial-gradient(circle at 12% -40%, rgba(255, 255, 255, 0.22), transparent 45%),
+    linear-gradient(110deg, #7a1220 0%, var(--primary) 45%, #c42a3c 100%);
+  box-shadow: 0 10px 30px -18px rgba(111, 16, 28, 0.9);
+}
+
+/* Faint dotted texture so the bar does not read as a flat block of color. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: linear-gradient(90deg, transparent 20%, #000 70%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 20%, #000 70%);
+  pointer-events: none;
+}
+
+.headerInner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  max-width: 1240px;
+  height: 80px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  transition: transform 160ms var(--ease);
+}
+
+/* Transparent logo on the red bar: drawn in white so it stays readable. */
+.brand img {
+  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+  /* The IV bag sits above the wordmark; lift the image so the "DooGo" letters line up with the nav text. */
+  transform: translateY(-11px);
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+/* Tabs sit on the bar itself; the active one gets a white indicator on the bottom edge. */
+.nav {
+  display: flex;
+  align-self: stretch;
+  gap: 4px;
+  margin-left: 12px;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 16px;
+  font-weight: 700;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: var(--surface-raised);
+  opacity: 0;
+  transform: scaleX(0.3);
+  transition: opacity 180ms ease, transform 220ms var(--ease);
+}
+
+.navLink:hover {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.12), transparent 70%);
+  color: var(--surface-raised);
+}
+
+.navLink:hover::after {
+  opacity: 0.45;
+  transform: scaleX(0.5);
+}
+
+.navActive,
+.navActive:hover {
+  color: var(--surface-raised);
+}
+
+.navActive::after,
+.navActive:hover::after {
+  opacity: 1;
+  transform: none;
+}
+
+.count {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #ffd166;
+  color: #5c1009;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.iconButton {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--surface-raised);
+  transition: background-color 160ms ease;
+}
+
+.iconButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.iconActive,
+.iconActive:hover {
+  background: var(--surface-raised);
+  color: var(--primary);
+}
+
+.dotCount {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  background: #ffd166;
+  color: #5c1009;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Account button: same 48px height as the bell so the two line up. */
+.account {
+  position: relative;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px 0 5px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--surface-raised);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.user:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.userActive,
+.userActive:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}
+
+.userName {
+  max-width: 120px;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.caret {
+  opacity: 0.8;
+  transition: transform 180ms var(--ease);
+}
+
+.caretOpen {
+  transform: rotate(180deg);
+}
+
+.avatar {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--surface-icon);
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.avatar img {
+  object-fit: cover;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 60;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid var(--border-neutral);
+  border-radius: 20px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 24px 48px -16px rgba(60, 8, 15, 0.35);
+  animation: menuIn 160ms var(--ease) both;
+}
+
+.menuHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+  padding: 10px 10px 14px;
+  border-bottom: 1px solid var(--border-neutral);
+}
+
+.menuHead > span:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuHead strong,
+.menuHead small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menuHead strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.menuHead small {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 10px;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.menuItem svg {
+  color: var(--text-secondary);
+}
+
+.menuItem:hover {
+  background: var(--surface-tinted);
+  color: var(--primary);
+}
+
+.menuItem:hover svg {
+  color: var(--primary);
+}
+
+.menuDanger {
+  margin-top: 6px;
+  border-top: 1px solid var(--border-neutral);
+  border-radius: 0 0 12px 12px;
+  color: var(--primary);
+}
+
+.menuDanger svg {
+  color: var(--primary);
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.main {
+  min-width: 0;
+  padding: 36px 32px 64px;
+}
+
+.mainBare {
+  padding: 24px 32px;
+}
+
+.column {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.wide {
+  max-width: 1176px;
+}
+
+.bare {
+  max-width: 1176px;
+  height: calc(100dvh - 80px - 48px);
+}
+
+@media (max-width: 1180px) {
+  .headerInner {
+    gap: 16px;
+    padding: 0 20px;
+  }
+
+  .navLink {
+    padding: 0 14px;
+  }
+
+  .userName {
+    display: none;
+  }
+}
+
+/* ---------- Public layout: one centered card ---------- */
+
+.auth {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(166, 27, 43, 0.1), transparent 38%),
+    radial-gradient(circle at 88% 85%, rgba(166, 27, 43, 0.08), transparent 40%),
+    var(--background-app);
+}
+
+.authCard {
+  width: 100%;
+  max-width: 1080px;
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(380px, 5fr) minmax(440px, 6fr);
+  overflow: hidden;
+  border: 1px solid var(--border-neutral);
+  border-radius: 32px;
+  background: var(--surface-raised);
+  box-shadow: 0 40px 80px -40px rgba(60, 8, 15, 0.45);
+  animation: cardIn 420ms var(--ease) both;
+}
+
+.brandPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 48px 44px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.18), transparent 45%),
+    linear-gradient(155deg, #c42a3c 0%, var(--primary) 45%, #5e0d18 100%);
+  color: var(--surface-raised);
+}
+
+/* Faint dotted texture, matching the signed-in header. */
+.brandPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: linear-gradient(160deg, transparent 30%, #000 85%);
+  -webkit-mask-image: linear-gradient(160deg, transparent 30%, #000 85%);
+  pointer-events: none;
+}
+
+/* Big soft drop in the corner. */
+.brandDrop {
+  position: absolute;
+  right: -90px;
+  bottom: -110px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50% 0 50% 50%;
+  background: rgba(255, 255, 255, 0.07);
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+
+.brandLink {
+  position: relative;
+  align-self: flex-start;
+}
+
+.brandLogo {
+  width: 170px;
+  filter: brightness(0) invert(1);
+}
+
+.pitch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pitch h2 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.pitch p {
+  max-width: 380px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.features {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.features li > span {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--surface-raised);
+  color: var(--primary);
+}
+
+.features strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.features p {
+  margin-top: 1px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.formPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px;
+}
+
+.formInner {
+  width: 100%;
+  max-width: 400px;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .authCard {
+    animation: none;
+  }
+}
+
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(166, 27, 43, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 85%, rgba(166, 27, 43, 0.06), transparent 40%),
+    var(--background-app);
+}
+
+.heroInner {
+  width: 100%;
+  max-width: 460px;
+}

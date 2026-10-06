@@ -1,0 +1,192 @@
+.dialog {
+  width: min(460px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 28px;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 30px 60px -20px rgba(60, 8, 15, 0.55);
+  animation: pop 320ms var(--ease) both;
+}
+
+.dialog::backdrop {
+  background: rgba(40, 10, 15, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 22px 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 -22px;
+  padding: 28px 22px 22px;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(166, 27, 43, 0.16), transparent 65%),
+    var(--surface-tinted);
+  text-align: center;
+}
+
+.drop {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  background: linear-gradient(150deg, #c42a3c, var(--primary) 55%, #6f101c);
+  color: var(--surface-raised);
+  box-shadow: 0 14px 24px -12px rgba(111, 16, 28, 0.9);
+}
+
+.header h2 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.header p {
+  max-width: 340px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fieldset legend {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.rh {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.group,
+.rhOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border-field);
+  background: var(--surface-raised);
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.group {
+  height: 58px;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.rhOption {
+  height: 46px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.group input,
+.rhOption input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.group:hover,
+.rhOption:hover {
+  border-color: var(--border-tinted);
+  background: var(--surface-tinted);
+}
+
+.group:has(input:focus-visible),
+.rhOption:has(input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.on,
+.on:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--surface-raised);
+}
+
+.hint {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--background-app);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.hint svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--primary);
+}
+
+.logout {
+  align-self: center;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: var(--primary);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog {
+    animation: none;
+  }
+}

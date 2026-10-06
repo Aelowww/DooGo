@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.bloodType {
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 96px;
+  padding: 16px;
+}
+
+.detail > span {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.detail strong {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.detail > span > span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}

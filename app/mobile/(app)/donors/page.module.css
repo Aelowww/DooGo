@@ -1,0 +1,93 @@
+.criteria {
+  display: block;
+  font-size: 16px;
+}
+
+.donor {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 112px;
+  padding: 16px;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.details strong {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.details b {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.details span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Donated within the last 56 days: still listed, but visibly not ready yet. */
+.waiting {
+  opacity: 0.72;
+}
+
+.critical {
+  color: #d92d20;
+}
+
+.urgent {
+  color: #c2410c;
+}
+
+.standard {
+  color: #2e9b57;
+}
+
+.broadcast {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-tinted);
+  border-radius: var(--radius-card);
+  background: var(--surface-tinted);
+}
+
+.broadcast span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.broadcast strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.broadcast small {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+:global(.doogo-app) .broadcast {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:global(.doogo-app) .broadcast button {
+  width: auto;
+  min-width: 200px;
+}

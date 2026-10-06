@@ -1,0 +1,49 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.text strong {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.text span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.text {
+  flex: 1;
+}
+
+.unread {
+  border-color: var(--border-tinted);
+  background: var(--surface-tinted);
+  transition: background-color 600ms ease, border-color 600ms ease;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: var(--primary);
+}

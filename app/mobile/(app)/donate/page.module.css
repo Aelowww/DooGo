@@ -1,0 +1,156 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-card);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.cardOn {
+  border-color: #bfe3cc;
+  background: linear-gradient(160deg, #f1faf4, var(--surface-raised) 70%);
+}
+
+.toggleRow,
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Text column only — the icon well is the first span. */
+.toggleRow > span,
+.row > span:not(:first-child),
+.link > span:not(:first-child) {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.card small {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardHead h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--border-tinted);
+  border-radius: var(--radius-pill);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background-color 160ms ease;
+}
+
+.edit:hover {
+  background: var(--surface-tinted);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.details div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.details div + div {
+  border-top: 1px solid var(--border-neutral);
+}
+
+.details dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.details dt svg {
+  color: var(--primary);
+}
+
+.details dd {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.missing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #b45309;
+}
+
+.note {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-tinted);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.link {
+  flex-direction: row;
+  align-items: center;
+  transition: border-color 160ms ease;
+}
+
+.link:hover {
+  border-color: var(--border-tinted);
+}
+
+.chevron {
+  color: var(--icon-inactive);
+}

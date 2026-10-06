@@ -1,0 +1,18 @@
+main .content {
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.logo {
+  width: 236px;
+}
+
+/* The desktop card already shows the logo in its brand panel. */
+:global(.doogo-auth) .logo {
+  display: none;
+}

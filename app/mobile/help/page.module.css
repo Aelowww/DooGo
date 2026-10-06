@@ -1,0 +1,67 @@
+.subtitle {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.topics {
+  padding-top: 8px;
+}
+
+.topic summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.topic summary::-webkit-details-marker {
+  display: none;
+}
+
+.chevron {
+  transition: transform 200ms var(--ease);
+}
+
+.topic[open] .chevron {
+  transform: rotate(90deg);
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px 18px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.answer strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.answer ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.answer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.version {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.version strong {
+  font-weight: 600;
+  line-height: 1.2;
+}

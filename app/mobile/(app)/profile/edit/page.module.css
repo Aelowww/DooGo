@@ -1,0 +1,25 @@
+.photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 0;
+}
+
+.changePhoto {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  cursor: pointer;
+}
+
+.changePhoto:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}

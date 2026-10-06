@@ -1,0 +1,243 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 20px;
+}
+
+.details div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.details dt {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.details dd {
+  margin: 0;
+  min-width: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* Received request: bold labels with dividers. */
+.detailsStrong dt {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.detailsStrong div + div {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-tinted);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.blocker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid #f5d0a9;
+  border-radius: var(--radius-input);
+  background: #fff7ed;
+  color: #7c2d12;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.blocker strong {
+  font-size: 15px;
+}
+
+.blocker a {
+  align-self: flex-start;
+  margin-top: 4px;
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.expired {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 16px 12px;
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-card);
+  background: var(--surface-raised);
+  list-style: none;
+  box-shadow: var(--shadow-card);
+}
+
+.timeline li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.timeline li + li::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: calc(50% + 12px);
+  left: calc(-50% + 12px);
+  height: 2px;
+  border-radius: 1px;
+  background: var(--border-neutral);
+}
+
+.timeline li.done + li::before,
+.timeline li.done + li.done::before {
+  background: var(--primary);
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-neutral);
+  border-radius: 50%;
+  background: var(--surface-raised);
+}
+
+.timeline strong {
+  color: var(--icon-inactive);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.timeline small {
+  min-height: 16px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.done .dot {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.done strong,
+.current strong {
+  color: var(--text-primary);
+}
+
+.current .dot {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(166, 27, 43, 0.14);
+  animation: pending 1.6s ease-in-out infinite;
+}
+
+.failed .dot {
+  border-color: var(--icon-inactive);
+  background: var(--icon-inactive);
+}
+
+.failed strong {
+  color: var(--text-secondary);
+}
+
+@keyframes pending {
+  50% {
+    box-shadow: 0 0 0 7px rgba(166, 27, 43, 0.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current .dot {
+    animation: none;
+  }
+}
+
+/* Bags: one donor = one unit */
+.units {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+}
+
+.units header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.units strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.units small {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.units p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.bags {
+  display: flex;
+  gap: 6px;
+}
+
+.bags i {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--border-neutral);
+}
+
+.bags .bagPledged {
+  background: repeating-linear-gradient(135deg, #e7a1a9 0 6px, #f3c9ce 6px 12px);
+}
+
+.bags .bagDonated {
+  background: var(--primary);
+}

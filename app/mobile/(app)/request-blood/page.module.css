@@ -1,0 +1,89 @@
+.urgency {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.urgencyOption {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 10px;
+  border: 1px solid var(--border-field);
+  border-radius: var(--radius-input);
+  background: var(--surface-raised);
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.urgencyOption input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.urgencyOption strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.urgencyOption strong::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--dot);
+}
+
+.urgencyOption small {
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.critical {
+  --dot: #d92d20;
+}
+
+.urgent {
+  --dot: #e98a15;
+}
+
+.standard {
+  --dot: #2e9b57;
+}
+
+.selected {
+  border-color: var(--primary);
+  background: var(--surface-tinted);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.urgencyOption:has(input:focus-visible) {
+  outline: 3px solid rgba(166, 27, 43, 0.3);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .urgencyOption:hover:not(.selected) {
+    border-color: var(--border-tinted);
+    background: var(--surface-tinted);
+  }
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cityCount {
+  margin-left: 6px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
